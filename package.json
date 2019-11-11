@@ -1,6 +1,6 @@
 {
   "name": "@asset-pipe/sink-gcs",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.|",
   "description": "Sink for Google Cloud Storage",
   "main": "lib/sink.js",
   "directories": {
