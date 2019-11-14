@@ -1,5 +1,5 @@
 {
-  "name": "@asset-pipe/sink-gcs",
+  "name": "@eik/sink-gcs",
   "version": "1.0.0-alpha.1",
   "description": "Sink for Google Cloud Storage",
   "main": "lib/sink.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asset-pipe/sink-gcs.git"
+    "url": "git+https://github.com/eik-lib/sink-gcs.git"
   },
   "author": "Trygve Lie",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/asset-pipe/sink-gcs/issues"
+    "url": "https://github.com/eik-lib/sink-gcs/issues"
   },
-  "homepage": "https://github.com/asset-pipe/sink-gcs#readme",
+  "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
     "@google-cloud/storage": "^4.1.0"
   }
