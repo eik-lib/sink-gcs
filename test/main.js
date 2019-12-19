@@ -5,7 +5,6 @@ const { test } = require('tap');
 const slug = require('unique-slug');
 const path = require('path');
 const fs = require('fs');
-const os = require('os');
 
 const utils = require('../lib/utils');
 const Sink = require('../lib/main');
