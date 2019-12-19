@@ -1,12 +1,12 @@
 'use strict';
 
 const { Writable, pipeline } = require('stream');
+const { stream } = require('@eik/common');
 const { test } = require('tap');
 const slug = require('unique-slug');
 const path = require('path');
 const fs = require('fs');
 
-const utils = require('../lib/utils');
 const Sink = require('../lib/main');
 
 const cred = path.join(__dirname, '../gcloud.json');
@@ -103,7 +103,7 @@ test('Sink() - .read() - File exists', async (t) => {
 
     const readFrom = await sink.read(file);
 
-    t.true(utils.isReadableStream(readFrom.stream), 'should resolve with a ReadFile object which has a .stream property');
+    t.true(stream.isReadableStream(readFrom.stream), 'should resolve with a ReadFile object which has a .stream property');
     t.type(readFrom.etag, 'string', 'should resolve with a ReadFile object which has a .etag property');
 
     const result = await pipeInto(readFrom.stream);
