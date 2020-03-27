@@ -134,6 +134,10 @@ test('Sink() - .read() - File exists', async t => {
         'string',
         'should resolve with a ReadFile object which has a .etag property',
     );
+    t.true(
+        readFrom.etag.length !== 0,
+        'should resolve with a ReadFile object which has a .etag property which is not empty',
+    );
 
     const result = await pipeInto(readFrom.stream);
 
