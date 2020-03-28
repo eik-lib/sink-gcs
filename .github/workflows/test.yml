@@ -31,3 +31,4 @@ jobs:
         env:
           CI: true
           TEST_SECTRET: ${{ secrets.TEST_SECRET }}
+          TEST_SECTRET_XXX: true
