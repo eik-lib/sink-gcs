@@ -9,7 +9,7 @@ const fs = require('fs');
 
 const Sink = require('../lib/main');
 
-console.log('YYY', process.env.TEST_FOO);
+console.log('YYY', process.env.TEST_FOO, process.env.TEST_FOO.length);
 console.log('XXX', process.env.TEST_FOO_XXX);
 
 const cred = path.join(__dirname, '../gcloud.json');
