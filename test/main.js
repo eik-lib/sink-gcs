@@ -9,6 +9,8 @@ const fs = require('fs');
 
 const Sink = require('../lib/main');
 
+console.log('XXX', process.env);
+
 const cred = path.join(__dirname, '../gcloud.json');
 process.env.GOOGLE_APPLICATION_CREDENTIALS = cred;
 
