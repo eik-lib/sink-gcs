@@ -30,5 +30,6 @@ jobs:
           npm run lint && npm test
         env:
           CI: true
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
           TEST_FOO: ${{ secrets.foo }}
           TEST_FOO_XXX: true
