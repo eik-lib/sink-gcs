@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+
 'use strict';
 
 const { Writable, pipeline } = require('stream');
@@ -12,7 +14,9 @@ const Sink = require('../lib/main');
 const getCredentials = () => {
     try {
         return JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
-    } catch (error) { }
+    } catch (error) {
+
+    }
 
     const filepath = path.join(__dirname, '../gcloud.json');
     const file = fs.readFileSync(filepath);
