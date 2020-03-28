@@ -8,15 +8,16 @@ const path = require('path');
 const fs = require('fs');
 
 const Sink = require('../lib/main');
-/*
-console.log('YYY', process.env.GOOGLE_APPLICATION_CREDENTIALS.length, 'YYY');
-console.log('XXX', process.env.TEST_FOO_XXX);
 
-const cred = path.join(__dirname, '../gcloud.json');
-process.env.GOOGLE_APPLICATION_CREDENTIALS = cred;
-*/
+const getCredentials = () => {
+    try {
+        return JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    } catch (error) { }
 
-const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    const filepath = path.join(__dirname, '../gcloud.json');
+    const file = fs.readFileSync(filepath);
+    return JSON.parse(file);
+}
 
 const fixture = fs
     .readFileSync(path.join(__dirname, '../fixtures/import-map.json'))
@@ -57,8 +58,8 @@ const pipe = (...streams) => {
 };
 
 const DEFAULT_CONFIG = {
-    bucket: 'eik_files',
-    credentials
+    credentials: getCredentials(),
+    projectId: 'eik-test',
 };
 
 test('Sink() - Object type', t => {
