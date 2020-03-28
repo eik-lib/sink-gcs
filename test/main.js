@@ -9,12 +9,12 @@ const fs = require('fs');
 
 const Sink = require('../lib/main');
 
-console.log('YYY', process.env.TEST_FOO, process.env.TEST_FOO.length, 'YYY');
+console.log('YYY', process.env.GOOGLE_APPLICATION_CREDENTIALS.length, 'YYY');
 console.log('XXX', process.env.TEST_FOO_XXX);
-
+/*
 const cred = path.join(__dirname, '../gcloud.json');
 process.env.GOOGLE_APPLICATION_CREDENTIALS = cred;
-
+*/
 const fixture = fs
     .readFileSync(path.join(__dirname, '../fixtures/import-map.json'))
     .toString();
