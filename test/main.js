@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+
 'use strict';
 
 const { Writable, pipeline } = require('stream');
@@ -9,8 +11,17 @@ const fs = require('fs');
 
 const Sink = require('../lib/main');
 
-const cred = path.join(__dirname, '../gcloud.json');
-process.env.GOOGLE_APPLICATION_CREDENTIALS = cred;
+const getCredentials = () => {
+    try {
+        return JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+    } catch (error) {
+
+    }
+
+    const filepath = path.join(__dirname, '../gcloud.json');
+    const file = fs.readFileSync(filepath);
+    return JSON.parse(file);
+}
 
 const fixture = fs
     .readFileSync(path.join(__dirname, '../fixtures/import-map.json'))
@@ -51,7 +62,8 @@ const pipe = (...streams) => {
 };
 
 const DEFAULT_CONFIG = {
-    bucket: 'eik_files',
+    credentials: getCredentials(),
+    projectId: 'eik-test',
 };
 
 test('Sink() - Object type', t => {
