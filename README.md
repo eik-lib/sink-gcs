@@ -35,11 +35,15 @@ const sink = new Sink({
     },
 });
 
-app.get("/", async (req, res, next) => {
-    const file = await sink.read('/path/to/file/file.js');
-    pipeline(file.stream, res, error => {
-        if (error) return next(error);
-    });
+app.get("/file.js", async (req, res, next) => {
+    try {
+        const file = await sink.read('/path/to/file/file.js');
+        pipeline(file.stream, res, (error) => {
+            if (error) return next(error);
+        });
+    } catch (error) {
+        next(error);
+    }
 });
 
 app.listen(8000);
@@ -82,6 +86,19 @@ The method takes the following arguments:
 
 Resolves with a writable stream.
 
+```js
+const fromStream = new SomeReadableStream();
+const sink = new Sink({ ... });
+try {
+    const file = await sink.write('/path/to/file/file.js', 'application/javascript');
+    pipeline(fromStream, file.stream, (error) => {
+        if (error) console.log(error);
+    });
+} catch (error) {
+    console.log(error);
+}
+```
+
 ### .read(filePath)
 
 Async method for reading a file from storage.
@@ -89,6 +106,19 @@ Async method for reading a file from storage.
 The method takes the following arguments:
 
 * `filePath` - String - Path to the file to be read - Required.
+
+```js
+const toStream = new SomeWritableStream();
+const sink = new Sink({ ... });
+try {
+    const file = await sink.read('/path/to/file/file.js');
+    pipeline(file.stream, toStream, (error) => {
+        if (error) console.log(error);
+    });
+} catch (error) {
+    console.log(error);
+}
+```
 
 ### .delete(filePath)
 
@@ -98,6 +128,17 @@ The method takes the following arguments:
 
 * `filePath` - String - Path to the file to be deleted - Required.
 
+Resolves if file is deleted and rejects if file could not be deleted.
+
+```js
+const sink = new Sink({ ... });
+try {
+    await sink.delete('/path/to/file/file.js');
+} catch (error) {
+    console.log(error);
+}
+```
+
 ### .exist(filePath)
 
 Async method for checking if a file exist in the storage.
@@ -105,6 +146,17 @@ Async method for checking if a file exist in the storage.
 The method takes the following arguments:
 
 * `filePath` - String - Path to the file to be checked for existence - Required.
+
+Resolves if file exist and rejects if file does not exist.
+
+```js
+const sink = new Sink({ ... });
+try {
+    await sink.exist('/path/to/file/file.js');
+} catch (error) {
+    console.log(error);
+}
+```
 
 ## License
 
