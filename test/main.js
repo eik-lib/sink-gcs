@@ -79,7 +79,7 @@ test('Sink() - .write()', async t => {
     const file = `${dir}/bar/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     t.resolves(pipe(writeFrom, writeTo), 'should write file to sink');
 
@@ -131,7 +131,7 @@ test('Sink() - .read() - File exists', async t => {
     const file = `${dir}/bar/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     await pipe(writeFrom, writeTo);
 
@@ -149,6 +149,16 @@ test('Sink() - .read() - File exists', async t => {
     t.true(
         readFrom.etag.length !== 0,
         'should resolve with a ReadFile object which has a .etag property which is not empty',
+    );
+    t.type(
+        readFrom.mimeType,
+        'string',
+        'should resolve with a ReadFile object which has a .mimeType property',
+    );
+    t.equal(
+        readFrom.mimeType,
+        'application/json',
+        'should resolve with a ReadFile object which has a .mimeType property which is not empty',
     );
 
     const result = await pipeInto(readFrom.stream);
@@ -178,7 +188,7 @@ test('Sink() - .delete() - Delete existing file', async t => {
     const file = `${dir}/bar/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     await pipe(writeFrom, writeTo);
 
@@ -202,7 +212,7 @@ test('Sink() - .read() - directory traversal prevention', async t => {
     const file = `${dir}/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     await pipe(writeFrom, writeTo);
 
@@ -252,11 +262,11 @@ test('Sink() - .delete() - Delete file in tree structure', async t => {
     const fileB = `${dir}/b/map.json`;
 
     const writeFromA = readFileStream('../fixtures/import-map.json');
-    const writeToA = await sink.write(fileA);
+    const writeToA = await sink.write(fileA, 'application/json');
     await pipe(writeFromA, writeToA);
 
     const writeFromB = readFileStream('../fixtures/import-map.json');
-    const writeToB = await sink.write(fileB);
+    const writeToB = await sink.write(fileB, 'application/json');
     await pipe(writeFromB, writeToB);
 
     await sink.delete(fileA);
@@ -279,11 +289,11 @@ test('Sink() - .delete() - Delete files recursively', async t => {
     const fileB = `${dir}/b/map.json`;
 
     const writeFromA = readFileStream('../fixtures/import-map.json');
-    const writeToA = await sink.write(fileA);
+    const writeToA = await sink.write(fileA, 'application/json');
     await pipe(writeFromA, writeToA);
 
     const writeFromB = readFileStream('../fixtures/import-map.json');
-    const writeToB = await sink.write(fileB);
+    const writeToB = await sink.write(fileB, 'application/json');
     await pipe(writeFromB, writeToB);
 
     await sink.delete(dir);
@@ -338,7 +348,7 @@ test('Sink() - .exist() - Check existing file', async t => {
     const file = `${dir}/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     await pipe(writeFrom, writeTo);
 
@@ -364,7 +374,7 @@ test('Sink() - .exist() - directory traversal prevention', async t => {
     const file = `${dir}/map.json`;
 
     const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file);
+    const writeTo = await sink.write(file, 'application/json');
 
     await pipe(writeFrom, writeTo);
 
