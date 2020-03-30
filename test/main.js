@@ -73,6 +73,22 @@ test('Sink() - Object type', t => {
     t.end();
 });
 
+test('Sink() - Argument "storageOptions" not provided' , t => {
+    t.plan(1);
+    t.throws(() => {
+        const sink = new Sink(); // eslint-disable-line no-unused-vars
+    }, /"storageOptions" argument must be provided/, 'Should throw');
+    t.end();
+});
+
+test('Sink() - Argument "storageOptions" is of wrong type', t => {
+    t.plan(1);
+    t.throws(() => {
+        const sink = new Sink('foo'); // eslint-disable-line no-unused-vars
+    }, /"storageOptions" argument must be provided/, 'Should throw');
+    t.end();
+});
+
 test('Sink() - .write()', async t => {
     const sink = new Sink(DEFAULT_CONFIG);
     const dir = slug();

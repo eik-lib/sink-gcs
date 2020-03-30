@@ -60,16 +60,17 @@ const sink = new Sink({
     credentials: {
         client_email: 'a@email.address',
         private_key: '[ ...snip... ]',
-        projectId: 'myProject',
     },
+    projectId: 'myProject',
 });
 ```
 
-### options
+This constructor takes the following arguments:
 
-An options object containing configuration. The following values can be provided:
-
-* `.credentials` - Object - A Google Cloud Storage [auth object][gcs-auth] - Required.
+ * `storageOptions` - Object - A Google Cloud Storage [storage options object][gcs-storage-options] - Required.
+ * `sinkOptions` - Object - An options object for the sink - See properties below - Optional.
+ * `sinkOptions.rootPath` - String - Root directory for where to store files in the GCS bucket - Default: `eik` - Optional.
+ * `sinkOptions.bucket` - String - Name of the bucket to store files in - Default: `eik_files` - Optional.
 
 ## API
 
@@ -194,5 +195,6 @@ SOFTWARE.
 
 [eik]: https://github.com/eik-lib
 [gcs-auth]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.50.0/google-cloud
+[gcs-storage-options]: https://googleapis.dev/nodejs/storage/latest/global.html#StorageOptions
 [gcs]: https://cloud.google.com/storage/
 [read-file]: https://github.com/eik-lib/common/blob/master/lib/classes/read-file.js
