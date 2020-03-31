@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Sink for Google Cloud Storage",
   "main": "lib/main",
-  "directories": {
-    "lib": "lib"
-  },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "tap test/**/*.js",
     "lint:fix": "eslint --fix .",
