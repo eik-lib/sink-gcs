@@ -23,7 +23,7 @@
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
     "@google-cloud/storage": "4.7.0",
-    "@eik/common": "1.0.0-alpha.3"
+    "@eik/common": "1.0.0-alpha.4"
   },
   "devDependencies": {
     "eslint": "6.8.0",
