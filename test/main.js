@@ -109,30 +109,30 @@ test('Sink() - .write() - directory traversal prevention', async t => {
     const dir = slug();
 
     t.rejects(
-        sink.write(`../../${dir}/sensitive.data`),
+        sink.write(`../../${dir}/sensitive.data`, 'application/octet-stream'),
         new Error('Directory traversal'),
         'should reject on ../../ at beginning of filepath',
     );
     t.rejects(
-        sink.write(`../${dir}/sensitive.data`),
+        sink.write(`../${dir}/sensitive.data`, 'application/octet-stream'),
         new Error('Directory traversal'),
         'should reject on ../ at beginning of filepath',
     );
     t.rejects(
-        sink.write(`/${dir}/../../../foo/sensitive.data`),
+        sink.write(`/${dir}/../../../foo/sensitive.data`, 'application/octet-stream'),
         new Error('Directory traversal'),
         'should reject on path traversal in the middle of filepath',
     );
     t.resolves(
-        sink.write(`./${dir}/sensitive.data`),
+        sink.write(`./${dir}/sensitive.data`, 'application/octet-stream'),
         'should resolve on ./ at beginning of filepath',
     );
     t.resolves(
-        sink.write(`/${dir}/sensitive.data`),
+        sink.write(`/${dir}/sensitive.data`, 'application/octet-stream'),
         'should resolve on / at beginning of filepath',
     );
     t.resolves(
-        sink.write(`//${dir}/sensitive.data`),
+        sink.write(`//${dir}/sensitive.data`, 'application/octet-stream'),
         'should resolve on // at beginning of filepath',
     );
 
