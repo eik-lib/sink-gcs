@@ -27,7 +27,7 @@ jobs:
           CI: true
       - name: npm test
         run: |
-          npm run lint && npm test
+          npm test
         env:
           CI: true
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
