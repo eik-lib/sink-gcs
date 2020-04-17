@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eik-lib/sink-gcs.git"
+    "url": "git@github.com:eik-lib/sink-gcs.git"
   },
   "author": "Trygve Lie",
   "license": "MIT",
@@ -23,7 +23,8 @@
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
     "@google-cloud/storage": "4.7.0",
-    "@eik/common": "1.0.0-alpha.4"
+    "@eik/common": "1.0.0-alpha.6",
+    "@eik/sink": "1.0.0"
   },
   "devDependencies": {
     "eslint": "6.8.0",
