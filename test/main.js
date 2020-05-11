@@ -104,6 +104,15 @@ test('Sink() - .write()', async t => {
     t.end();
 });
 
+test('Sink() - .write() - arguments is illegal', async (t) => {
+    const sink = new Sink(DEFAULT_CONFIG);
+    const dir = slug();
+
+    t.rejects(sink.write(300, 'application/octet-stream'), new TypeError('Argument must be a String'), 'should reject on illegal filepath');
+    t.rejects(sink.write(`${dir}/bar/map.json`, 300), new TypeError('Argument must be a String'), 'should reject on illegal mime type');
+    t.end();
+});
+
 test('Sink() - .write() - directory traversal prevention', async t => {
     const sink = new Sink(DEFAULT_CONFIG);
     const dir = slug();
@@ -197,28 +206,9 @@ test('Sink() - .read() - File does NOT exist', t => {
     t.end();
 });
 
-test('Sink() - .delete() - Delete existing file', async t => {
+test('Sink() - .read() - arguments is illegal', async (t) => {
     const sink = new Sink(DEFAULT_CONFIG);
-
-    const dir = slug();
-    const file = `${dir}/bar/map.json`;
-
-    const writeFrom = readFileStream('../fixtures/import-map.json');
-    const writeTo = await sink.write(file, 'application/json');
-
-    await pipe(writeFrom, writeTo);
-
-    t.resolves(
-        sink.exist(file),
-        'should resolve - file is in sink before deletion',
-    );
-
-    await sink.delete(file);
-
-    t.rejects(sink.exist(file), 'should reject - file was deleted');
-
-    // Clean up sink
-    await sink.delete(dir);
+    t.rejects(sink.read(300), new TypeError('Argument must be a String'), 'should reject on illegal filepath');
     t.end();
 });
 
@@ -265,6 +255,31 @@ test('Sink() - .read() - directory traversal prevention', async t => {
     t.end();
 });
 
+test('Sink() - .delete() - Delete existing file', async t => {
+    const sink = new Sink(DEFAULT_CONFIG);
+
+    const dir = slug();
+    const file = `${dir}/bar/map.json`;
+
+    const writeFrom = readFileStream('../fixtures/import-map.json');
+    const writeTo = await sink.write(file, 'application/json');
+
+    await pipe(writeFrom, writeTo);
+
+    t.resolves(
+        sink.exist(file),
+        'should resolve - file is in sink before deletion',
+    );
+
+    await sink.delete(file);
+
+    t.rejects(sink.exist(file), 'should reject - file was deleted');
+
+    // Clean up sink
+    await sink.delete(dir);
+    t.end();
+});
+
 test('Sink() - .delete() - Delete non existing file', t => {
     const sink = new Sink(DEFAULT_CONFIG);
     t.resolves(sink.delete('/bar/foo/not-exist.json'), 'should resolve');
@@ -295,6 +310,12 @@ test('Sink() - .delete() - Delete file in tree structure', async t => {
 
     // Clean up sink
     await sink.delete(dir);
+    t.end();
+});
+
+test('Sink() - .delete() - arguments is illegal', async (t) => {
+    const sink = new Sink(DEFAULT_CONFIG);
+    t.rejects(sink.delete(300), new TypeError('Argument must be a String'), 'should reject on illegal filepath');
     t.end();
 });
 
@@ -381,6 +402,12 @@ test('Sink() - .exist() - Check non existing file', t => {
         sink.exist('/bar/foo/not-exist.json'),
         'should reject - file does not exist',
     );
+    t.end();
+});
+
+test('Sink() - .exist() - arguments is illegal', async (t) => {
+    const sink = new Sink(DEFAULT_CONFIG);
+    t.rejects(sink.exist(300), new TypeError('Argument must be a String'), 'should reject on illegal filepath');
     t.end();
 });
 
