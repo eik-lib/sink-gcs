@@ -24,6 +24,8 @@ jobs:
   - name: npm test
     run: |
       npm test
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
  release:
   if: github.event_name == 'push' && github.ref == 'refs/heads/master'
