@@ -28,6 +28,3 @@ jobs:
       - name: npm test
         run: |
           npm test
-        env:
-          CI: true
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
