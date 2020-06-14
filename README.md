@@ -68,6 +68,7 @@ const sink = new Sink({
 This constructor takes the following arguments:
 
  * `storageOptions` - Object - A Google Cloud Storage [storage options object][gcs-storage-options] - Required.
+ * `writeTimeout` - Number - Timeout, in milliseconds, for write operations to the sink - Default: `30000` - Optional.
  * `sinkOptions` - Object - An options object for the sink - See properties below - Optional.
  * `sinkOptions.rootPath` - String - Root directory for where to store files in the GCS bucket - Default: `eik` - Optional.
  * `sinkOptions.bucket` - String - Name of the bucket to store files in - Default: `eik_files` - Optional.
