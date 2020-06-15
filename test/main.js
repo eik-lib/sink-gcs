@@ -113,6 +113,20 @@ test('Sink() - .write() - arguments is illegal', async (t) => {
     t.end();
 });
 
+test('Sink() - .write() - timeout', async (t) => {
+    const sink = new Sink(DEFAULT_CONFIG, {
+        writeTimeout: 40,
+    });
+    const dir = slug();
+    const file = `${dir}/bar/map.json`;
+
+    const writeFrom = readFileStream('../fixtures/import-map.json');
+    const writeTo = await sink.write(file, 'application/json');
+
+    t.rejects(pipe(writeFrom, writeTo), /network timeout at/, 'should reject on timeout');
+    t.end();
+});
+
 test('Sink() - .write() - directory traversal prevention', async t => {
     const sink = new Sink(DEFAULT_CONFIG);
     const dir = slug();
