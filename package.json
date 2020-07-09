@@ -6,10 +6,12 @@
   "files": [
     "CHANGELOG.md",
     "package.json",
+    "README.md",
     "lib"
   ],
   "scripts": {
     "test": "tap test/**/*.js",
+    "test:snapshots:update": "tap test/**/*.js --snapshot",
     "lint:fix": "eslint --fix .",
     "lint": "eslint ."
   },
@@ -24,9 +26,10 @@
   },
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
-    "@google-cloud/storage": "5.1.1",
     "@eik/common": "1.0.0-alpha.7",
-    "@eik/sink": "1.1.0"
+    "@eik/sink": "1.1.0",
+    "@google-cloud/storage": "5.1.1",
+    "@metrics/client": "^2.5.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "5.0.1",

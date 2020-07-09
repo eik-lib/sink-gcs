@@ -172,6 +172,53 @@ try {
 }
 ```
 
+## Properties
+
+The Sink instance has the following properties:
+
+### .metrics
+
+Attribute which holds a [metrics stream](https://github.com/metrics-js/client) that
+emits metrics data.
+
+The stream will emit an event of the following character for each metric:
+
+```js
+{
+    name: 'eik_core_sink_gcs',
+    description: 'Counter measuring access to the Google Cloud Storage sink',
+    timestamp: 1579468682.531,
+    type: 2,
+    value: 1,
+    labels: [
+        {
+            name: 'operation',
+            value: 'write'
+        },
+        {
+            name: 'success',
+            value: true
+        },
+        {
+            name: 'access',
+            value: true
+        }
+    ],
+    time: null,
+    meta: {}
+}
+```
+
+The metric will have the following labels:
+
+ * `operation` - `String` - The operation which triggered the metric. Can be `write`, `read`, `delete` or `exist`.
+ * `success` - `Boolean` - If the operation was successfull in terms of being a valid operation and running the operation against the Google Cloud Storage without erroring. 
+ * `access` - `Boolean` - If the operation triggered access to the Google Cloud Storage.
+
+Do note that the `access` label is `true` when the Sink runs an operation against the 
+Google Cloud Storage which can generate a cost. In other words; this can be used to
+monitor excessive access to prevent cost. 
+
 ## License
 
 Copyright (c) 2020 FINN.no
