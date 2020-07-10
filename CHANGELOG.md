@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/eik-lib/sink-gcs/compare/v1.1.0...v1.1.1) (2020-07-10)
+
+
+### Bug Fixes
+
+* Make gzip compression configurable ([b7c46c6](https://github.com/eik-lib/sink-gcs/commit/b7c46c6dd59e2a702dc9ebcf6cd3d8a4ca6257ae))
+
 # [1.1.0](https://github.com/eik-lib/sink-gcs/compare/v1.0.4...v1.1.0) (2020-07-09)
 
 
