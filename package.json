@@ -28,7 +28,7 @@
   "dependencies": {
     "@eik/common": "1.0.0-alpha.7",
     "@eik/sink": "1.1.0",
-    "@google-cloud/storage": "5.1.2",
+    "@google-cloud/storage": "5.2.0",
     "@metrics/client": "^2.5.0"
   },
   "devDependencies": {
