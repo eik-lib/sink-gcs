@@ -1,3 +1,10 @@
+## [1.1.30](https://github.com/eik-lib/sink-gcs/compare/v1.1.29...v1.1.30) (2021-03-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v5.8.1 ([a5822f5](https://github.com/eik-lib/sink-gcs/commit/a5822f5c8a763258062b40a36b39a96ff4832b4f))
+
 ## [1.1.29](https://github.com/eik-lib/sink-gcs/compare/v1.1.28...v1.1.29) (2021-02-18)
 
 
