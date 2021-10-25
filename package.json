@@ -45,7 +45,7 @@
     "eslint-plugin-prettier": "3.4.1",
     "prettier": "2.4.1",
     "semantic-release": "17.4.7",
-    "tap": "15.0.9",
+    "tap": "15.0.10",
     "unique-slug": "2.0.2"
   }
 }
