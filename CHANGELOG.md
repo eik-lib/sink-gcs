@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/eik-lib/sink-gcs/compare/v1.1.42...v1.2.0) (2022-01-07)
+
+
+### Features
+
+* Convert to ESM ([07a2ffc](https://github.com/eik-lib/sink-gcs/commit/07a2ffc50d9bb88dab27dd9c61d28a34ef22f4e4))
+
 ## [1.1.42](https://github.com/eik-lib/sink-gcs/compare/v1.1.41...v1.1.42) (2021-12-01)
 
 
