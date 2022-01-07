@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/eik-lib/sink-gcs/compare/v1.2.0...v1.2.1) (2022-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/sink to v1.2.0 ([d383071](https://github.com/eik-lib/sink-gcs/commit/d3830717780884f78569537e6b2cfd04f695638c))
+
 # [1.2.0](https://github.com/eik-lib/sink-gcs/compare/v1.1.42...v1.2.0) (2022-01-07)
 
 
