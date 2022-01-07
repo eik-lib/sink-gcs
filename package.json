@@ -2,7 +2,7 @@
   "name": "@eik/sink-gcs",
   "version": "1.2.1",
   "description": "Sink for Google Cloud Storage",
-  "main": "lib/main",
+  "main": "lib/main.js",
   "type": "module",
   "files": [
     "CHANGELOG.md",
