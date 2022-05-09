@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
-    "@eik/common": "3.0.0",
+    "@eik/common": "3.0.1",
     "@eik/sink": "1.2.1",
     "@google-cloud/storage": "5.19.4",
     "@metrics/client": "^2.5.0"
