@@ -1,3 +1,10 @@
+## [1.2.12](https://github.com/eik-lib/sink-gcs/compare/v1.2.11...v1.2.12) (2022-05-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @eik/common to v3.0.1 ([40fc81a](https://github.com/eik-lib/sink-gcs/commit/40fc81ab48fbb50b805829ec40967520d8ec4798))
+
 ## [1.2.11](https://github.com/eik-lib/sink-gcs/compare/v1.2.10...v1.2.11) (2022-05-02)
 
 
