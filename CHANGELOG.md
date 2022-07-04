@@ -1,3 +1,10 @@
+## [1.2.16](https://github.com/eik-lib/sink-gcs/compare/v1.2.15...v1.2.16) (2022-07-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @google-cloud/storage to v6.2.2 ([b860ff0](https://github.com/eik-lib/sink-gcs/commit/b860ff0f03e81fa23075d6e703fd5819edffd68d))
+
 ## [1.2.15](https://github.com/eik-lib/sink-gcs/compare/v1.2.14...v1.2.15) (2022-06-27)
 
 
