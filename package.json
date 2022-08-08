@@ -1,6 +1,6 @@
 {
   "name": "@eik/sink-gcs",
-  "version": "1.2.17",
+  "version": "1.2.18",
   "description": "Sink for Google Cloud Storage",
   "main": "lib/main.js",
   "type": "module",
