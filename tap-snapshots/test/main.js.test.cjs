@@ -7,7 +7,7 @@
 
 'use strict'
 
-exports[`test/main.js TAP Sink() - .metrics - all successfull operations > metrics should match snapshot 1`] = `
+exports[`test/main.js > TAP > Sink() - .metrics - all successfull operations > metrics should match snapshot 1`] = `
 [
   {
     "name": "eik_core_sink_gcs",
