@@ -44,6 +44,6 @@
     "prettier": "3.2.5",
     "semantic-release": "23.0.2",
     "tap": "18.7.0",
-    "unique-slug": "2.0.2"
+    "unique-slug": "4.0.0"
   }
 }
