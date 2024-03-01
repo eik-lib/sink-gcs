@@ -11,7 +11,7 @@
     "lib"
   ],
   "scripts": {
-    "test": "tap --no-check-coverage",
+    "test": "tap --disable-coverage --allow-empty-coverage",
     "test:snapshots:update": "tap test/**/*.js --snapshot",
     "lint:fix": "eslint --fix .",
     "lint": "eslint ."
@@ -43,7 +43,7 @@
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.8.8",
     "semantic-release": "19.0.5",
-    "tap": "16.3.10",
+    "tap": "18.7.0",
     "unique-slug": "2.0.2"
   }
 }
