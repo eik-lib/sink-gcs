@@ -73,7 +73,7 @@ This constructor takes the following arguments:
 
  * `storageOptions` - Object - A Google Cloud Storage [storage options object][gcs-storage-options] - Required.
  * `options` - Object - Other options related to storage and behavior - Optional.
-    * `writeTimeout` - Number - Timeout, in milliseconds, for write operations to the sink - Default: `30000` - Optional.
+    * `writeTimeout` - Number - Timeout, in milliseconds, for write operations to the sink - Default: `60000` - Optional.
     * `writeGzip` - Boolean - If files should be written with gzip compression - Default: `false` - Optional.
     * `rootPath` - String - Root directory for where to store files in the GCS bucket - Default: `eik` - Optional.
     * `bucket` - String - Name of the bucket to store files in - Default: `eik_files` - Optional.
