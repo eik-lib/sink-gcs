@@ -1,3 +1,10 @@
+## [1.2.31](https://github.com/eik-lib/sink-gcs/compare/v1.2.30...v1.2.31) (2024-07-03)
+
+
+### Bug Fixes
+
+* increase the default timeout to 60000 ([#263](https://github.com/eik-lib/sink-gcs/issues/263)) ([9fe63d7](https://github.com/eik-lib/sink-gcs/commit/9fe63d76a9efdd5ce762fa9417a7d4a634a2dcbd))
+
 ## [1.2.30](https://github.com/eik-lib/sink-gcs/compare/v1.2.29...v1.2.30) (2023-07-17)
 
 
