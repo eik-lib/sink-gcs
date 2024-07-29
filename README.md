@@ -22,22 +22,25 @@ $ npm install @eik/sink-gcs
 Read a file from [Google Cloud Storage][gcs] and serve it on HTTP:
 
 ```js
-const { pipeline } = require('stream');
-const express = require("express");
-const Sink = require("@eik/sink-gcs");
+import { pipeline } from 'node:stream';
+import express from 'express';
+import Sink from '@eik/sink-gcs';
 
 const app = express();
-const sink = new Sink({
-    credentials: {
-        client_email: 'a@email.address',
-        private_key: '[ ...snip... ]',
-        projectId: 'myProject',
+const sink = new Sink(
+    {
+        credentials: {
+            client_email: 'a@email.address',
+            private_key: '[ ...snip... ]',
+            projectId: 'myProject',
+        },
     },
-}, {
-    writeTimeout: 20000,
-});
+    {
+        writeTimeout: 20000,
+    },
+);
 
-app.get("/file.js", async (req, res, next) => {
+app.get('/file.js', async (req, res, next) => {
     try {
         const file = await sink.read('/path/to/file/file.js');
         pipeline(file.stream, res, (error) => {
@@ -56,7 +59,7 @@ app.listen(8000);
 Create a new Sink instance.
 
 ```js
-const Sink = require("@eik/sink-gcs");
+import Sink from '@eik/sink-gcs';
 
 const sink = new Sink({
     credentials: {
@@ -71,12 +74,12 @@ const sink = new Sink({
 
 This constructor takes the following arguments:
 
- * `storageOptions` - Object - A Google Cloud Storage [storage options object][gcs-storage-options] - Required.
- * `options` - Object - Other options related to storage and behavior - Optional.
-    * `writeTimeout` - Number - Timeout, in milliseconds, for write operations to the sink - Default: `60000` - Optional.
-    * `writeGzip` - Boolean - If files should be written with gzip compression - Default: `false` - Optional.
-    * `rootPath` - String - Root directory for where to store files in the GCS bucket - Default: `eik` - Optional.
-    * `bucket` - String - Name of the bucket to store files in - Default: `eik_files` - Optional.
+-   `storageOptions` - Object - A Google Cloud Storage [storage options object][gcs-storage-options] - Required.
+-   `options` - Object - Other options related to storage and behavior - Optional.
+    -   `writeTimeout` - Number - Timeout, in milliseconds, for write operations to the sink - Default: `60000` - Optional.
+    -   `writeGzip` - Boolean - If files should be written with gzip compression - Default: `false` - Optional.
+    -   `rootPath` - String - Root directory for where to store files in the GCS bucket - Default: `eik` - Optional.
+    -   `bucket` - String - Name of the bucket to store files in - Default: `eik_files` - Optional.
 
 ## API
 
@@ -88,8 +91,8 @@ Async method for writing a file to storage.
 
 This method takes the following arguments:
 
-* `filePath` - String - Path to the file to be stored - Required.
-* `contentType` - String - The content type of the file - Required.
+-   `filePath` - String - Path to the file to be stored - Required.
+-   `contentType` - String - The content type of the file - Required.
 
 Resolves with a writable stream.
 
@@ -115,14 +118,14 @@ Async method for reading a file from storage.
 
 This method takes the following arguments:
 
-* `filePath` - String - Path to the file to be read - Required.
+-   `filePath` - String - Path to the file to be read - Required.
 
 Resolves with a [ReadFile][read-file] object which holds metadata about
 the file and a readable stream with the byte stream of the file on the
 `.stream` property.
 
 ```js
-const { pipeline } = require('stream);
+import { pipeline } from 'node:stream';
 
 const toStream = new SomeWritableStream();
 const sink = new Sink({ ... });
@@ -143,7 +146,7 @@ Async method for deleting a file in storage.
 
 This method takes the following arguments:
 
-* `filePath` - String - Path to the file to be deleted - Required.
+-   `filePath` - String - Path to the file to be deleted - Required.
 
 Resolves if file is deleted and rejects if file could not be deleted.
 
@@ -163,7 +166,7 @@ Async method for checking if a file exist in the storage.
 
 This method takes the following arguments:
 
-* `filePath` - String - Path to the file to be checked for existence - Required.
+-   `filePath` - String - Path to the file to be checked for existence - Required.
 
 Resolves if file exists and rejects if file does not exist.
 
@@ -216,13 +219,13 @@ The stream will emit an event of the following character for each metric:
 
 The metric will have the following labels:
 
- * `operation` - `String` - The operation which triggered the metric. Can be `write`, `read`, `delete` or `exist`.
- * `success` - `Boolean` - If the operation was successfull in terms of being a valid operation and running the operation against the Google Cloud Storage without erroring. 
- * `access` - `Boolean` - If the operation triggered access to the Google Cloud Storage.
+-   `operation` - `String` - The operation which triggered the metric. Can be `write`, `read`, `delete` or `exist`.
+-   `success` - `Boolean` - If the operation was successfull in terms of being a valid operation and running the operation against the Google Cloud Storage without erroring.
+-   `access` - `Boolean` - If the operation triggered access to the Google Cloud Storage.
 
-Do note that the `access` label is `true` when the Sink runs an operation against the 
+Do note that the `access` label is `true` when the Sink runs an operation against the
 Google Cloud Storage which can generate a cost. In other words; this can be used to
-monitor excessive access to prevent cost. 
+monitor excessive access to prevent cost.
 
 ## License
 
