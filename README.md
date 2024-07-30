@@ -253,4 +253,4 @@ SOFTWARE.
 [gcs-auth]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/0.50.0/google-cloud
 [gcs-storage-options]: https://googleapis.dev/nodejs/storage/latest/global.html#StorageOptions
 [gcs]: https://cloud.google.com/storage/
-[read-file]: https://github.com/eik-lib/common/blob/master/lib/classes/read-file.js
+[read-file]: https://github.com/eik-lib/common/blob/main/lib/classes/read-file.js
