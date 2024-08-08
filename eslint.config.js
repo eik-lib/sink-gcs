@@ -1,3 +1,8 @@
+import config from '@eik/eslint-config';
+
+export default config;
+
+/*
 {
   "parser": "@babel/eslint-parser",
   "extends": ["airbnb-base", "prettier"],
@@ -18,3 +23,5 @@
     "no-restricted-syntax": [0]
   }
 }
+
+*/
