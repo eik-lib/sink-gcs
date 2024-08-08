@@ -1,27 +1,3 @@
 import config from '@eik/eslint-config';
 
 export default config;
-
-/*
-{
-  "parser": "@babel/eslint-parser",
-  "extends": ["airbnb-base", "prettier"],
-  "plugins": ["prettier"],
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module",
-    "requireConfigFile": false
-  },
-  "rules": {
-    "import/prefer-default-export": "off",
-    "import/extensions": ["error", {
-      "js": "ignorePackages"
-      }
-    ],
-    "class-methods-use-this": [0],
-    "no-underscore-dangle": [0],
-    "no-restricted-syntax": [0]
-  }
-}
-
-*/
