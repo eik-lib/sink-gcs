@@ -27,7 +27,7 @@ jobs:
 
       - run: npm run lint
 
-      - run: npm run build
+      - run: npm run types
 
       - run: npm test
 
