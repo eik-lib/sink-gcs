@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "test": "tap --disable-coverage --allow-empty-coverage",
-    "test:snapshots:update": "tap test/**/*.js --snapshot",
+    "test:snapshots": "tap test/**/*.js --snapshot",
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
     "types": "run-s types:module types:test",
@@ -42,6 +42,7 @@
     "@eik/prettier-config": "1.0.1",
     "@eik/semantic-release-config": "1.0.0",
     "@eik/typescript-config": "1.0.0",
+    "@types/readable-stream": "4.0.15",
     "eslint": "9.8.0",
     "npm-run-all": "4.1.5",
     "prettier": "3.3.3",
