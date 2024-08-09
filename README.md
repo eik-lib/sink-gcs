@@ -2,10 +2,6 @@
 
 A sink for writing to and reading from [Google Cloud Storage][gcs].
 
-[![Dependencies](https://img.shields.io/david/eik-lib/sink-gcs.svg)](https://david-dm.org/eik-lib/sink-gcs)
-[![GitHub Actions status](https://github.com/eik-lib/sink-gcs/workflows/Run%20Lint%20and%20Tests/badge.svg)](https://github.com/eik-lib/sink-gcs/actions?query=workflow%3A%22Run+Lint+and+Tests%22)
-[![Known Vulnerabilities](https://snyk.io/test/github/eik-lib/sink-gcs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/eik-lib/sink-gcs?targetFile=package.json)
-
 The intention of the [Eik][eik] sink modules is to be able to write to and read from
 files in different storage backends by swapping sink modules. Because each sink
 implements the same public API it is possible to use this sink in one environment and
