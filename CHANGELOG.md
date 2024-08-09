@@ -1,3 +1,10 @@
+## [1.2.32](https://github.com/eik-lib/sink-gcs/compare/v1.2.31...v1.2.32) (2024-08-09)
+
+
+### Bug Fixes
+
+* add type definitions ([a24ea1e](https://github.com/eik-lib/sink-gcs/commit/a24ea1e2ed8d66b0bb4b1c3ef44640adaa56bac0))
+
 ## [1.2.31](https://github.com/eik-lib/sink-gcs/compare/v1.2.30...v1.2.31) (2024-07-03)
 
 
