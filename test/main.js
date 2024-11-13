@@ -79,7 +79,10 @@ const pipe = (...streams) =>
 		new Promise((resolve, reject) => {
 			// @ts-expect-error
 			pipeline(...streams, (error) => {
-				if (error) return reject(error);
+				if (error) {
+					console.error(error);
+					return reject(error);
+				}
 				return resolve();
 			});
 		})
@@ -165,11 +168,7 @@ tap.test("Sink() - .write() - timeout", async (t) => {
 	const writeFrom = readFileStream("../fixtures/import-map.json");
 	const writeTo = await sink.write(file, "application/json");
 
-	t.rejects(
-		() => pipe(writeFrom, writeTo),
-		/network timeout at/,
-		"should reject on timeout",
-	);
+	t.rejects(() => pipe(writeFrom, writeTo), /network timeout at/);
 	t.end();
 });
 
