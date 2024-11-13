@@ -166,7 +166,7 @@ tap.test("Sink() - .write() - timeout", async (t) => {
 	const writeTo = await sink.write(file, "application/json");
 
 	t.rejects(
-		pipe(writeFrom, writeTo),
+		() => pipe(writeFrom, writeTo),
 		/network timeout at/,
 		"should reject on timeout",
 	);
