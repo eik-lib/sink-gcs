@@ -159,16 +159,19 @@ tap.test("Sink() - .write() - arguments is illegal", async (t) => {
 });
 
 tap.test("Sink() - .write() - timeout", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG, {
-		writeTimeout: 40,
-	});
+	const sink = new Sink(
+		{ ...DEFAULT_CONFIG, retryOptions: { maxRetries: 0 } },
+		{
+			writeTimeout: 40,
+		},
+	);
 	const dir = slug();
 	const file = `${dir}/bar/map.json`;
 
 	const writeFrom = readFileStream("../fixtures/import-map.json");
 	const writeTo = await sink.write(file, "application/json");
 
-	t.rejects(() => pipe(writeFrom, writeTo), /network timeout at/);
+	t.rejects(pipe(writeFrom, writeTo), /network timeout at/);
 	t.end();
 });
 
