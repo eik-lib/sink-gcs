@@ -80,7 +80,6 @@ const pipe = (...streams) =>
 			// @ts-expect-error
 			pipeline(...streams, (error) => {
 				if (error) {
-					console.error(error);
 					return reject(error);
 				}
 				return resolve();
@@ -159,12 +158,9 @@ tap.test("Sink() - .write() - arguments is illegal", async (t) => {
 });
 
 tap.test("Sink() - .write() - timeout", async (t) => {
-	const sink = new Sink(
-		{ ...DEFAULT_CONFIG, retryOptions: { maxRetries: 0 } },
-		{
-			writeTimeout: 40,
-		},
-	);
+	const sink = new Sink(DEFAULT_CONFIG, {
+		writeTimeout: 40,
+	});
 	const dir = slug();
 	const file = `${dir}/bar/map.json`;
 
