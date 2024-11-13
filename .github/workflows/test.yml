@@ -30,7 +30,5 @@ jobs:
       - run: npm run types
 
       - run: npm test
-
-      - run: npm test
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
