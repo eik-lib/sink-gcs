@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "clean": "rimraf .tap node_modules types",
-    "test": "tap --disable-coverage --allow-empty-coverage",
+    "test": "tap --disable-coverage --allow-empty-coverage --jobs=1",
     "test:snapshots": "tap test/**/*.js --snapshot",
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
