@@ -1,17 +1,12 @@
 /* eslint-disable no-empty */
 
 import { Writable, pipeline } from "node:stream";
-import os from "node:os";
 import { stream } from "@eik/common";
-import uniqueSlug from "unique-slug";
+import slug from "unique-slug";
 import tap from "tap";
 import fs from "node:fs";
 
 import Sink from "../lib/main.js";
-
-function slug() {
-	return `${os.platform()}-${process.versions.node.split(".")[0]}/${uniqueSlug()}`;
-}
 
 // Ignore the value for "timestamp" field in the snapshots
 tap.cleanSnapshot = (s) => {
