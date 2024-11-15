@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/eik-lib/sink-gcs/compare/v1.2.32...v2.0.0) (2024-11-15)
+
+
+### Bug Fixes
+
+* update dependencies ([#280](https://github.com/eik-lib/sink-gcs/issues/280)) ([8f2568a](https://github.com/eik-lib/sink-gcs/commit/8f2568aede7dd77e827cec575feb5b6f38070725))
+
+
+### BREAKING CHANGES
+
+* Requires Node >=20.5.0
+
 ## [1.2.32](https://github.com/eik-lib/sink-gcs/compare/v1.2.31...v1.2.32) (2024-08-09)
 
 
