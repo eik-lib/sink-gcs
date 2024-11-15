@@ -10,7 +10,7 @@ import fs from "node:fs";
 import Sink from "../lib/main.js";
 
 function slug() {
-	return `${os.platform()}/${uniqueSlug()}`;
+	return `${os.platform()}-${process.versions.node.split(".")[0]}/${uniqueSlug()}`;
 }
 
 // Ignore the value for "timestamp" field in the snapshots
