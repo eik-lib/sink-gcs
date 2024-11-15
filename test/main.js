@@ -123,7 +123,7 @@ tap.test('Sink() - Argument "storageOptions" is of wrong type', (t) => {
 	t.end();
 });
 
-tap.test("Sink() - .write()", async (t) => {
+await tap.test("Sink() - .write()", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 	const file = `${dir}/bar/map.json`;
@@ -131,31 +131,29 @@ tap.test("Sink() - .write()", async (t) => {
 	const writeFrom = readFileStream("../fixtures/import-map.json");
 	const writeTo = await sink.write(file, "application/json");
 
-	t.resolves(pipe(writeFrom, writeTo), "should write file to sink");
+	await t.resolves(pipe(writeFrom, writeTo), "should write file to sink");
 
 	// Clean up sink
 	await sink.delete(dir);
-	t.end();
 });
 
-tap.test("Sink() - .write() - arguments is illegal", async (t) => {
+await tap.test("Sink() - .write() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 
-	t.rejects(
+	await t.rejects(
 		sink.write(300, "application/octet-stream"),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
 	);
-	t.rejects(
+	await t.rejects(
 		sink.write(`${dir}/bar/map.json`, 300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal mime type",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .write() - timeout", async (t) => {
+await tap.test("Sink() - .write() - timeout", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG, {
 		writeTimeout: 40,
 	});
@@ -165,55 +163,56 @@ tap.test("Sink() - .write() - timeout", async (t) => {
 	const writeFrom = readFileStream("../fixtures/import-map.json");
 	const writeTo = await sink.write(file, "application/json");
 
-	t.rejects(
+	await t.rejects(
 		pipe(writeFrom, writeTo),
 		/network timeout at/,
 		"should reject on timeout",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .write() - directory traversal prevention", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG);
-	const dir = slug();
+await tap.test(
+	"Sink() - .write() - directory traversal prevention",
+	async (t) => {
+		const sink = new Sink(DEFAULT_CONFIG);
+		const dir = slug();
 
-	t.rejects(
-		sink.write(`../../${dir}/sensitive.data`, "application/octet-stream"),
-		new Error("Directory traversal"),
-		"should reject on ../../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.write(`../${dir}/sensitive.data`, "application/octet-stream"),
-		new Error("Directory traversal"),
-		"should reject on ../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.write(
-			`/${dir}/../../../foo/sensitive.data`,
-			"application/octet-stream",
-		),
-		new Error("Directory traversal"),
-		"should reject on path traversal in the middle of filepath",
-	);
-	t.resolves(
-		sink.write(`./${dir}/sensitive.data`, "application/octet-stream"),
-		"should resolve on ./ at beginning of filepath",
-	);
-	t.resolves(
-		sink.write(`/${dir}/sensitive.data`, "application/octet-stream"),
-		"should resolve on / at beginning of filepath",
-	);
-	t.resolves(
-		sink.write(`//${dir}/sensitive.data`, "application/octet-stream"),
-		"should resolve on // at beginning of filepath",
-	);
+		await t.rejects(
+			sink.write(`../../${dir}/sensitive.data`, "application/octet-stream"),
+			new Error("Directory traversal"),
+			"should reject on ../../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.write(`../${dir}/sensitive.data`, "application/octet-stream"),
+			new Error("Directory traversal"),
+			"should reject on ../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.write(
+				`/${dir}/../../../foo/sensitive.data`,
+				"application/octet-stream",
+			),
+			new Error("Directory traversal"),
+			"should reject on path traversal in the middle of filepath",
+		);
+		await t.resolves(
+			sink.write(`./${dir}/sensitive.data`, "application/octet-stream"),
+			"should resolve on ./ at beginning of filepath",
+		);
+		await t.resolves(
+			sink.write(`/${dir}/sensitive.data`, "application/octet-stream"),
+			"should resolve on / at beginning of filepath",
+		);
+		await t.resolves(
+			sink.write(`//${dir}/sensitive.data`, "application/octet-stream"),
+			"should resolve on // at beginning of filepath",
+		);
 
-	// Clean up sink
-	await sink.delete(dir);
-	t.end();
-});
+		// Clean up sink
+		await sink.delete(dir);
+	},
+);
 
-tap.test("Sink() - .read() - File exists", async (t) => {
+await tap.test("Sink() - .read() - File exists", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 	const file = `${dir}/bar/map.json`;
@@ -259,70 +258,69 @@ tap.test("Sink() - .read() - File exists", async (t) => {
 
 	// Clean up sink
 	await sink.delete(dir);
-	t.end();
 });
 
-tap.test("Sink() - .read() - File does NOT exist", (t) => {
+await tap.test("Sink() - .read() - File does NOT exist", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
-	t.rejects(sink.read(`/${dir}/foo/not-exist.json`), "should reject");
-	t.end();
+	await t.rejects(sink.read(`/${dir}/foo/not-exist.json`), "should reject");
 });
 
-tap.test("Sink() - .read() - arguments is illegal", async (t) => {
+await tap.test("Sink() - .read() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
-	t.rejects(
+	await t.rejects(
 		sink.read(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .read() - directory traversal prevention", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG);
-	const dir = slug();
-	const file = `${dir}/map.json`;
+await tap.test(
+	"Sink() - .read() - directory traversal prevention",
+	async (t) => {
+		const sink = new Sink(DEFAULT_CONFIG);
+		const dir = slug();
+		const file = `${dir}/map.json`;
 
-	const writeFrom = readFileStream("../fixtures/import-map.json");
-	const writeTo = await sink.write(file, "application/json");
+		const writeFrom = readFileStream("../fixtures/import-map.json");
+		const writeTo = await sink.write(file, "application/json");
 
-	await pipe(writeFrom, writeTo);
+		await pipe(writeFrom, writeTo);
 
-	t.rejects(
-		sink.read(`../../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.read(`../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.read(`/${dir}/../../../foo/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on path traversal in the middle of filepath",
-	);
-	t.resolves(
-		sink.read(`./${file}`),
-		"should resolve on ./ at beginning of filepath",
-	);
-	t.resolves(
-		sink.read(`/${file}`),
-		"should resolve on / at beginning of filepath",
-	);
-	t.resolves(
-		sink.read(`//${file}`),
-		"should resolve on // at beginning of filepath",
-	);
+		await t.rejects(
+			sink.read(`../../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.read(`../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.read(`/${dir}/../../../foo/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on path traversal in the middle of filepath",
+		);
+		await t.resolves(
+			sink.read(`./${file}`),
+			"should resolve on ./ at beginning of filepath",
+		);
+		await t.resolves(
+			sink.read(`/${file}`),
+			"should resolve on / at beginning of filepath",
+		);
+		await t.resolves(
+			sink.read(`//${file}`),
+			"should resolve on // at beginning of filepath",
+		);
 
-	// Clean up sink
-	await sink.delete(dir);
-	t.end();
-});
+		// Clean up sink
+		await sink.delete(dir);
+	},
+);
 
-tap.test("Sink() - .delete() - Delete existing file", async (t) => {
+await tap.test("Sink() - .delete() - Delete existing file", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 
 	const dir = slug();
@@ -333,64 +331,66 @@ tap.test("Sink() - .delete() - Delete existing file", async (t) => {
 
 	await pipe(writeFrom, writeTo);
 
-	t.resolves(
+	await t.resolves(
 		sink.exist(file),
 		"should resolve - file is in sink before deletion",
 	);
 
 	await sink.delete(file);
 
-	t.rejects(sink.exist(file), "should reject - file was deleted");
+	await t.rejects(sink.exist(file), "should reject - file was deleted");
 
 	// Clean up sink
 	await sink.delete(dir);
-	t.end();
 });
 
-tap.test("Sink() - .delete() - Delete non existing file", (t) => {
+await tap.test("Sink() - .delete() - Delete non existing file", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
-	t.resolves(sink.delete("/bar/foo/not-exist.json"), "should resolve");
-	t.end();
+	await t.resolves(sink.delete("/bar/foo/not-exist.json"), "should resolve");
 });
 
-tap.test("Sink() - .delete() - Delete file in tree structure", async (t) => {
+await tap.test(
+	"Sink() - .delete() - Delete file in tree structure",
+	async (t) => {
+		const sink = new Sink(DEFAULT_CONFIG);
+		const dir = slug();
+		const fileA = `${dir}/a/map.json`;
+		const fileB = `${dir}/b/map.json`;
+
+		const writeFromA = readFileStream("../fixtures/import-map.json");
+		const writeToA = await sink.write(fileA, "application/json");
+		await pipe(writeFromA, writeToA);
+
+		const writeFromB = readFileStream("../fixtures/import-map.json");
+		const writeToB = await sink.write(fileB, "application/json");
+		await pipe(writeFromB, writeToB);
+
+		await sink.delete(fileA);
+
+		await t.rejects(
+			sink.exist(fileA),
+			"should reject on file A - file was deleted",
+		);
+		await t.resolves(
+			sink.exist(fileB),
+			"should resolve on file B - file was NOT deleted",
+		);
+
+		// Clean up sink
+		await sink.delete(dir);
+	},
+);
+
+await tap.test("Sink() - .delete() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
-	const dir = slug();
-	const fileA = `${dir}/a/map.json`;
-	const fileB = `${dir}/b/map.json`;
-
-	const writeFromA = readFileStream("../fixtures/import-map.json");
-	const writeToA = await sink.write(fileA, "application/json");
-	await pipe(writeFromA, writeToA);
-
-	const writeFromB = readFileStream("../fixtures/import-map.json");
-	const writeToB = await sink.write(fileB, "application/json");
-	await pipe(writeFromB, writeToB);
-
-	await sink.delete(fileA);
-
-	t.rejects(sink.exist(fileA), "should reject on file A - file was deleted");
-	t.resolves(
-		sink.exist(fileB),
-		"should resolve on file B - file was NOT deleted",
-	);
-
-	// Clean up sink
-	await sink.delete(dir);
-	t.end();
-});
-
-tap.test("Sink() - .delete() - arguments is illegal", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG);
-	t.rejects(
+	await t.rejects(
 		sink.delete(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .delete() - Delete files recursively", async (t) => {
+await tap.test("Sink() - .delete() - Delete files recursively", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 	const fileA = `${dir}/a/map.json`;
@@ -406,51 +406,57 @@ tap.test("Sink() - .delete() - Delete files recursively", async (t) => {
 
 	await sink.delete(dir);
 
-	t.rejects(sink.exist(fileA), "should reject on file A - file was deleted");
-	t.rejects(sink.exist(fileB), "should reject on file B - file was deleted");
-
-	t.end();
+	await t.rejects(
+		sink.exist(fileA),
+		"should reject on file A - file was deleted",
+	);
+	await t.rejects(
+		sink.exist(fileB),
+		"should reject on file B - file was deleted",
+	);
 });
 
-tap.test("Sink() - .delete() - directory traversal prevention", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG);
-	const dir = slug();
-	const file = `${dir}/map.json`;
+await tap.test(
+	"Sink() - .delete() - directory traversal prevention",
+	async (t) => {
+		const sink = new Sink(DEFAULT_CONFIG);
+		const dir = slug();
+		const file = `${dir}/map.json`;
 
-	t.rejects(
-		sink.delete(`../../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.delete(`../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.delete(`/${dir}/../../../foo/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on path traversal in the middle of filepath",
-	);
-	t.resolves(
-		sink.delete(`./${file}`),
-		"should resolve on ./ at beginning of filepath",
-	);
-	t.resolves(
-		sink.delete(`/${file}`),
-		"should resolve on / at beginning of filepath",
-	);
-	t.resolves(
-		sink.delete(`//${file}`),
-		"should resolve on // at beginning of filepath",
-	);
+		await t.rejects(
+			sink.delete(`../../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.delete(`../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.delete(`/${dir}/../../../foo/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on path traversal in the middle of filepath",
+		);
+		await t.resolves(
+			sink.delete(`./${file}`),
+			"should resolve on ./ at beginning of filepath",
+		);
+		await t.resolves(
+			sink.delete(`/${file}`),
+			"should resolve on / at beginning of filepath",
+		);
+		await t.resolves(
+			sink.delete(`//${file}`),
+			"should resolve on // at beginning of filepath",
+		);
 
-	// Clean up sink
-	await sink.delete(dir);
-	t.end();
-});
+		// Clean up sink
+		await sink.delete(dir);
+	},
+);
 
-tap.test("Sink() - .exist() - Check existing file", async (t) => {
+await tap.test("Sink() - .exist() - Check existing file", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 	const file = `${dir}/map.json`;
@@ -460,76 +466,75 @@ tap.test("Sink() - .exist() - Check existing file", async (t) => {
 
 	await pipe(writeFrom, writeTo);
 
-	t.resolves(sink.exist(file), "should resolve - file is in sink");
+	await t.resolves(sink.exist(file), "should resolve - file is in sink");
 
 	// Clean up sink
 	await sink.delete(dir);
-	t.end();
 });
 
-tap.test("Sink() - .exist() - Check non existing file", (t) => {
+await tap.test("Sink() - .exist() - Check non existing file", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
-	t.rejects(
+	await t.rejects(
 		sink.exist("/bar/foo/not-exist.json"),
 		"should reject - file does not exist",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .exist() - arguments is illegal", async (t) => {
+await tap.test("Sink() - .exist() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
-	t.rejects(
+	await t.rejects(
 		sink.exist(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
 	);
-	t.end();
 });
 
-tap.test("Sink() - .exist() - directory traversal prevention", async (t) => {
-	const sink = new Sink(DEFAULT_CONFIG);
-	const dir = slug();
-	const file = `${dir}/map.json`;
+await tap.test(
+	"Sink() - .exist() - directory traversal prevention",
+	async (t) => {
+		const sink = new Sink(DEFAULT_CONFIG);
+		const dir = slug();
+		const file = `${dir}/map.json`;
 
-	const writeFrom = readFileStream("../fixtures/import-map.json");
-	const writeTo = await sink.write(file, "application/json");
+		const writeFrom = readFileStream("../fixtures/import-map.json");
+		const writeTo = await sink.write(file, "application/json");
 
-	await pipe(writeFrom, writeTo);
+		await pipe(writeFrom, writeTo);
 
-	t.rejects(
-		sink.exist(`../../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.exist(`../${dir}/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on ../ at beginning of filepath",
-	);
-	t.rejects(
-		sink.exist(`/${dir}/../../../foo/sensitive.data`),
-		new Error("Directory traversal"),
-		"should reject on path traversal in the middle of filepath",
-	);
-	t.resolves(
-		sink.exist(`./${file}`),
-		"should resolve on ./ at beginning of filepath",
-	);
-	t.resolves(
-		sink.exist(`/${file}`),
-		"should resolve on / at beginning of filepath",
-	);
-	t.resolves(
-		sink.exist(`//${file}`),
-		"should resolve on // at beginning of filepath",
-	);
+		await t.rejects(
+			sink.exist(`../../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.exist(`../${dir}/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on ../ at beginning of filepath",
+		);
+		await t.rejects(
+			sink.exist(`/${dir}/../../../foo/sensitive.data`),
+			new Error("Directory traversal"),
+			"should reject on path traversal in the middle of filepath",
+		);
+		await t.resolves(
+			sink.exist(`./${file}`),
+			"should resolve on ./ at beginning of filepath",
+		);
+		await t.resolves(
+			sink.exist(`/${file}`),
+			"should resolve on / at beginning of filepath",
+		);
+		await t.resolves(
+			sink.exist(`//${file}`),
+			"should resolve on // at beginning of filepath",
+		);
 
-	// Clean up sink
-	await sink.delete(dir);
-	t.end();
-});
+		// Clean up sink
+		await sink.delete(dir);
+	},
+);
 
-tap.test("Sink() - .metrics - all successfull operations", async (t) => {
+await tap.test("Sink() - .metrics - all successfull operations", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	const dir = slug();
 	const file = `${dir}/bar/map.json`;
