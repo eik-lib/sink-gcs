@@ -1,3 +1,10 @@
+## [2.0.10](https://github.com/eik-lib/sink-gcs/compare/v2.0.9...v2.0.10) (2025-06-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @metrics/client to v2.5.5 ([#302](https://github.com/eik-lib/sink-gcs/issues/302)) ([cbeae51](https://github.com/eik-lib/sink-gcs/commit/cbeae511af5caf1e1969c07775ed3e7be7f3d33b))
+
 ## [2.0.9](https://github.com/eik-lib/sink-gcs/compare/v2.0.8...v2.0.9) (2025-06-15)
 
 
