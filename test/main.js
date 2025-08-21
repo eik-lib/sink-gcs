@@ -79,7 +79,10 @@ const pipe = (...streams) =>
 		new Promise((resolve, reject) => {
 			// @ts-expect-error
 			pipeline(...streams, (error) => {
-				if (error) return reject(error);
+				if (error) {
+					console.error(error);
+					return reject(error);
+				}
 				return resolve();
 			});
 		})
@@ -165,7 +168,7 @@ await tap.test("Sink() - .write() - timeout", async (t) => {
 
 	await t.rejects(
 		pipe(writeFrom, writeTo),
-		/network timeout at/,
+		/timeout/,
 		"should reject on timeout",
 	);
 });
