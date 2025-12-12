@@ -1,3 +1,10 @@
+## [2.0.13](https://github.com/eik-lib/sink-gcs/compare/v2.0.12...v2.0.13) (2025-12-12)
+
+
+### Bug Fixes
+
+* update eik/common ([fa3020f](https://github.com/eik-lib/sink-gcs/commit/fa3020f16011d73539a3f2f66b1278c3aa3c8818))
+
 ## [2.0.12](https://github.com/eik-lib/sink-gcs/compare/v2.0.11...v2.0.12) (2025-09-10)
 
 
