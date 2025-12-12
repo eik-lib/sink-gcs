@@ -14,7 +14,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macOS-latest, windows-latest]
-        node-version: [20, 22]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -22,9 +21,9 @@ jobs:
 
       - uses: actions/setup-node@v6
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
 
-      - run: npm install
+      - run: npm ci
 
       - run: npm run lint
 
