@@ -142,11 +142,13 @@ await tap.test("Sink() - .write() - arguments is illegal", async (t) => {
 	const dir = slug();
 
 	await t.rejects(
+		// @ts-expect-error Testing bad input
 		sink.write(300, "application/octet-stream"),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
 	);
 	await t.rejects(
+		// @ts-expect-error Testing bad input
 		sink.write(`${dir}/bar/map.json`, 300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal mime type",
@@ -269,6 +271,7 @@ await tap.test("Sink() - .read() - File does NOT exist", async (t) => {
 await tap.test("Sink() - .read() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	await t.rejects(
+		// @ts-expect-error Testing bad input
 		sink.read(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
@@ -384,6 +387,7 @@ await tap.test(
 await tap.test("Sink() - .delete() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	await t.rejects(
+		// @ts-expect-error Testing bad input
 		sink.delete(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
@@ -483,6 +487,7 @@ await tap.test("Sink() - .exist() - Check non existing file", async (t) => {
 await tap.test("Sink() - .exist() - arguments is illegal", async (t) => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	await t.rejects(
+		// @ts-expect-error Testing bad input
 		sink.exist(300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal filepath",
