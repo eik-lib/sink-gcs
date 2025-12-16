@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/eik-lib/sink-gcs/compare/v2.0.13...v3.0.0) (2025-12-16)
+
+
+### Bug Fixes
+
+* upgrade to v7 of google-cloud/storage ([#321](https://github.com/eik-lib/sink-gcs/issues/321)) ([2201055](https://github.com/eik-lib/sink-gcs/commit/2201055c99ef4dbf2458df85e927bda88fe4aef0))
+
+
+### BREAKING CHANGES
+
+* Now uses v7 of google-cloud/storage under the hood. Refer to the [upstream changelog](https://github.com/googleapis/nodejs-storage/blob/HEAD/CHANGELOG.md?rgh-link-date=2025-12-15T15%3A27%3A20Z#700-2023-08-03) for a list of breaking changes.
+
 ## [2.0.13](https://github.com/eik-lib/sink-gcs/compare/v2.0.12...v2.0.13) (2025-12-12)
 
 
