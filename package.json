@@ -33,15 +33,15 @@
   },
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
-    "@eik/common": "5.1.13",
+    "@eik/common": "5.1.14",
     "@eik/sink": "1.2.5",
     "@google-cloud/storage": "7.18.0",
     "@metrics/client": "2.5.5"
   },
   "devDependencies": {
-    "@eik/eslint-config": "1.0.23",
+    "@eik/eslint-config": "1.0.25",
     "@eik/prettier-config": "1.0.1",
-    "@eik/semantic-release-config": "1.0.11",
+    "@eik/semantic-release-config": "1.0.12",
     "@eik/typescript-config": "1.0.0",
     "@types/readable-stream": "4.0.23",
     "eslint": "9.39.2",
