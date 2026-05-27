@@ -1,12 +1,18 @@
 /* eslint-disable no-empty */
 
 import { Writable, pipeline } from "node:stream";
+import { randomBytes } from "node:crypto";
 import { stream } from "@eik/common";
-import slug from "unique-slug";
 import tap from "tap";
 import fs from "node:fs";
 
 import Sink from "../lib/main.js";
+
+const slug = () => randomBytes(4).toString("hex");
+
+const RE_STORAGE_OPTIONS_REQUIRED =
+	/"storageOptions" argument must be provided/;
+const RE_NETWORK_TIMEOUT = /network timeout at/;
 
 // Ignore the value for "timestamp" field in the snapshots
 tap.cleanSnapshot = (s) => {
@@ -16,7 +22,7 @@ tap.cleanSnapshot = (s) => {
 
 const getCredentials = () => {
 	try {
-		return JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+		return JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS || "");
 		// eslint-disable-next-line no-unused-vars
 	} catch (error) {}
 
@@ -34,10 +40,15 @@ const fixture = fs
 const MetricsInto = class MetricsInto extends Writable {
 	constructor() {
 		super({ objectMode: true });
+		/** @type {any[]} */
 		this._metrics = [];
 	}
 
-	_write(chunk, encoding, callback) {
+	_write(
+		/** @type {any} */ chunk,
+		/** @type {any} */ encoding,
+		/** @type {() => void} */ callback,
+	) {
 		this._metrics.push(chunk);
 		callback();
 	}
@@ -55,9 +66,9 @@ const MetricsInto = class MetricsInto extends Writable {
 const readFileStream = (file = "../README.md") =>
 	fs.createReadStream(new URL(file, import.meta.url));
 
-const pipeInto = (...streams) =>
+const pipeInto = (/** @type {any[]} */ ...streams) =>
 	new Promise((resolve, reject) => {
-		const buffer = [];
+		const buffer = /** @type {any[]} */ ([]);
 
 		const to = new Writable({
 			objectMode: false,
@@ -74,7 +85,7 @@ const pipeInto = (...streams) =>
 		});
 	});
 
-const pipe = (...streams) =>
+const pipe = (/** @type {any[]} */ ...streams) =>
 	/** @type {Promise<void>} */ (
 		new Promise((resolve, reject) => {
 			// @ts-expect-error
@@ -104,7 +115,7 @@ tap.test('Sink() - Argument "storageOptions" not provided', (t) => {
 			// @ts-expect-error Testing bad input
 			const sink = new Sink(); // eslint-disable-line no-unused-vars
 		},
-		/"storageOptions" argument must be provided/,
+		RE_STORAGE_OPTIONS_REQUIRED,
 		"Should throw",
 	);
 	t.end();
@@ -117,7 +128,7 @@ tap.test('Sink() - Argument "storageOptions" is of wrong type', (t) => {
 			// @ts-expect-error Testing bad input
 			const sink = new Sink("foo"); // eslint-disable-line no-unused-vars
 		},
-		/"storageOptions" argument must be provided/,
+		RE_STORAGE_OPTIONS_REQUIRED,
 		"Should throw",
 	);
 	t.end();
@@ -167,7 +178,7 @@ await tap.test("Sink() - .write() - timeout", async (t) => {
 
 	await t.rejects(
 		pipe(writeFrom, writeTo),
-		/network timeout at/,
+		RE_NETWORK_TIMEOUT,
 		"should reject on timeout",
 	);
 });
