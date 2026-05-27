@@ -1,3 +1,10 @@
+## [3.0.18](https://github.com/eik-lib/sink-gcs/compare/v3.0.17...v3.0.18) (2026-05-27)
+
+
+### Bug Fixes
+
+* Bump deps ([63f77f8](https://github.com/eik-lib/sink-gcs/commit/63f77f875ba5f04651149f0e58ecde194f42dcad))
+
 ## [3.0.17](https://github.com/eik-lib/sink-gcs/compare/v3.0.16...v3.0.17) (2026-05-22)
 
 

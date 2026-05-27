@@ -1,6 +1,6 @@
 {
   "name": "@eik/sink-gcs",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "Sink for Google Cloud Storage",
   "main": "lib/main.js",
   "types": "./types/main.d.ts",
@@ -13,7 +13,9 @@
     "types"
   ],
   "tap": {
-    "exclude": ["test/**/*.d.ts"]
+    "exclude": [
+      "test/**/*.d.ts"
+    ]
   },
   "scripts": {
     "clean": "node -e \"['.tap', 'node_modules', 'types'].forEach(d => require('fs').rmSync(d, {recursive: true, force: true}))\"",
