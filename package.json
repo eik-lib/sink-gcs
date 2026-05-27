@@ -12,8 +12,11 @@
     "lib",
     "types"
   ],
+  "tap": {
+    "exclude": ["test/**/*.d.ts"]
+  },
   "scripts": {
-    "clean": "rimraf .tap node_modules types",
+    "clean": "node -e \"['.tap', 'node_modules', 'types'].forEach(d => require('fs').rmSync(d, {recursive: true, force: true}))\"",
     "test": "tap --disable-coverage --allow-empty-coverage",
     "test:snapshots": "tap test/**/*.js --snapshot",
     "lint:fix": "eslint --fix .",
@@ -33,24 +36,22 @@
   },
   "homepage": "https://github.com/eik-lib/sink-gcs#readme",
   "dependencies": {
-    "@eik/common": "5.1.27",
-    "@eik/sink": "1.2.5",
+    "@eik/common": "5.1.28",
+    "@eik/sink": "1.2.6",
     "@google-cloud/storage": "7.19.0",
     "@metrics/client": "2.5.5"
   },
   "devDependencies": {
-    "@eik/eslint-config": "1.0.25",
-    "@eik/prettier-config": "1.0.1",
-    "@eik/semantic-release-config": "1.0.16",
-    "@eik/typescript-config": "1.0.1",
+    "@eik/eslint-config": "2.0.6",
+    "@eik/prettier-config": "1.0.2",
+    "@eik/semantic-release-config": "1.0.17",
+    "@eik/typescript-config": "1.0.2",
     "@types/readable-stream": "4.0.23",
-    "eslint": "9.39.4",
-    "npm-run-all2": "8.0.4",
+    "eslint": "10.4.0",
+    "npm-run-all2": "9.0.1",
     "prettier": "3.8.3",
-    "rimraf": "6.1.3",
     "semantic-release": "25.0.3",
-    "tap": "21.7.2",
-    "typescript": "5.9.3",
-    "unique-slug": "6.0.0"
+    "tap": "21.7.4",
+    "typescript": "6.0.3"
   }
 }
