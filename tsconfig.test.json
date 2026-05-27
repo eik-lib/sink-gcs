@@ -1,6 +1,6 @@
 {
   "extends": "@eik/typescript-config/test.json",
-  "include": ["./test/**/*.js", "./test/**/*.d.ts"],
+  "include": ["./test/**/*.js"],
   "compilerOptions": {
     "rootDir": "."
   }
