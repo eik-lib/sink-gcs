@@ -1,3 +1,10 @@
+## [3.0.19](https://github.com/eik-lib/sink-gcs/compare/v3.0.18...v3.0.19) (2026-05-28)
+
+
+### Bug Fixes
+
+* Replace Tap with node.js test runner ([a1a0fb7](https://github.com/eik-lib/sink-gcs/commit/a1a0fb7a222b24c4e24f717d6cc9e2fc5690ac2d))
+
 ## [3.0.18](https://github.com/eik-lib/sink-gcs/compare/v3.0.17...v3.0.18) (2026-05-27)
 
 
