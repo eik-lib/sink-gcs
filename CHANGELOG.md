@@ -1,3 +1,10 @@
+## [3.0.21](https://github.com/eik-lib/sink-gcs/compare/v3.0.20...v3.0.21) (2026-05-31)
+
+
+### Bug Fixes
+
+* **deps:** update eik packages ([#372](https://github.com/eik-lib/sink-gcs/issues/372)) ([3b5e823](https://github.com/eik-lib/sink-gcs/commit/3b5e823ecc8c371d76cf971acd965894c5fda241))
+
 ## [3.0.20](https://github.com/eik-lib/sink-gcs/compare/v3.0.19...v3.0.20) (2026-05-28)
 
 
