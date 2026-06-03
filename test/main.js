@@ -487,6 +487,20 @@ await test("Sink() - .exist() - Check non existing file", async () => {
 	);
 });
 
+await test("Sink() - .exist() - non-existing file rejects with an Error", async () => {
+	const sink = new Sink(DEFAULT_CONFIG);
+	const dir = slug();
+	await assert.rejects(
+		sink.exist(`/${dir}/foo/not-exist.json`),
+		(err) => {
+			assert.ok(err instanceof Error, "rejection must be an Error instance");
+			assert.ok(err.message.length > 0, "Error must have a non-empty message");
+			return true;
+		},
+		"should reject with an Error instance",
+	);
+});
+
 await test("Sink() - .exist() - arguments is illegal", async () => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	await assert.rejects(
