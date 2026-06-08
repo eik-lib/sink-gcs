@@ -1,3 +1,10 @@
+## [3.0.23](https://github.com/eik-lib/sink-gcs/compare/v3.0.22...v3.0.23) (2026-06-08)
+
+
+### Bug Fixes
+
+* Improve GCS usage ([91746fb](https://github.com/eik-lib/sink-gcs/commit/91746fbf6453ec99c84b7e53113da283b0ea6cf7))
+
 ## [3.0.22](https://github.com/eik-lib/sink-gcs/compare/v3.0.21...v3.0.22) (2026-06-05)
 
 
