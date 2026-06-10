@@ -1,3 +1,10 @@
+## [3.0.26](https://github.com/eik-lib/sink-gcs/compare/v3.0.25...v3.0.26) (2026-06-10)
+
+
+### Bug Fixes
+
+* Set resumable to true ([555cbfe](https://github.com/eik-lib/sink-gcs/commit/555cbfe48c16d06a9f71fe0378bd244ba4561b4e))
+
 ## [3.0.25](https://github.com/eik-lib/sink-gcs/compare/v3.0.24...v3.0.25) (2026-06-09)
 
 
