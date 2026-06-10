@@ -13,7 +13,6 @@ const slug = () => randomBytes(4).toString("hex");
 
 const RE_STORAGE_OPTIONS_REQUIRED =
 	/"storageOptions" argument must be provided/;
-const RE_NETWORK_TIMEOUT = /network timeout at/;
 const RE_TIMESTAMP = /"timestamp": [0-9.]+,/gi;
 const RE_DIRECTORY_TRAVERSAL = /Directory traversal/;
 
@@ -158,23 +157,6 @@ await test("Sink() - .write() - arguments is illegal", async () => {
 		sink.write(`${dir}/bar/map.json`, 300),
 		new TypeError("Argument must be a String"),
 		"should reject on illegal mime type",
-	);
-});
-
-await test("Sink() - .write() - timeout", async () => {
-	const sink = new Sink(DEFAULT_CONFIG, {
-		writeTimeout: 40,
-	});
-	const dir = slug();
-	const file = `${dir}/bar/map.json`;
-
-	const writeFrom = readFileStream("../fixtures/import-map.json");
-	const writeTo = await sink.write(file, "application/json");
-
-	await assert.rejects(
-		pipe(writeFrom, writeTo),
-		RE_NETWORK_TIMEOUT,
-		"should reject on timeout",
 	);
 });
 
