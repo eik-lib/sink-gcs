@@ -1,3 +1,12 @@
+## [3.0.30](https://github.com/eik-lib/sink-gcs/compare/v3.0.29...v3.0.30) (2026-08-14)
+
+
+### Bug Fixes
+
+* delete single files directly to avoid requiring storage.objects.list ([5940cf5](https://github.com/eik-lib/sink-gcs/commit/5940cf5a313a56c499ca6860acab5f35999a27c9))
+* **deps:** update dependency @google-cloud/storage to v8 ([049139f](https://github.com/eik-lib/sink-gcs/commit/049139fd6daeed127407859dde622a49c102007f))
+* reformat delete method chain to satisfy prettier ([e902fb4](https://github.com/eik-lib/sink-gcs/commit/e902fb409a7f697346f2859dde50d3474b37a075))
+
 ## [3.0.29](https://github.com/eik-lib/sink-gcs/compare/v3.0.28...v3.0.29) (2026-08-11)
 
 
