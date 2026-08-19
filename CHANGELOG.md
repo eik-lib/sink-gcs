@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/eik-lib/sink-gcs/compare/v3.0.31...v3.1.0) (2026-08-19)
+
+
+### Features
+
+* add write() options for GCS precondition writes and generation to read() ([21f1c93](https://github.com/eik-lib/sink-gcs/commit/21f1c932285aeae045db0ef864399da54eeb4a67))
+
 ## [3.0.31](https://github.com/eik-lib/sink-gcs/compare/v3.0.30...v3.0.31) (2026-08-19)
 
 
