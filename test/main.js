@@ -559,3 +559,57 @@ await test("Sink() - .metrics - all successfull operations", async (t) => {
 	const cleaned = metrics.replace(RE_TIMESTAMP, '"timestamp": -1,');
 	t.assert.snapshot(cleaned);
 });
+
+// Unit-level regression tests that do not require GCS credentials.
+// They verify error propagation behaviour by injecting a mock bucket.
+
+// Unit-level regression test that does not require GCS credentials.
+
+test("Sink() - write() - ifNotExists: a GCS 412 causes the stream to error exactly once", async () => {
+	// Regression: the error handler called gcsStream.emit("error", conflict)
+	// to re-classify a 412 Precondition Failed as ALREADY_EXISTS. This caused
+	// the stream to emit "error" multiple times for a single GCS rejection,
+	// accumulating extra error listeners on shared streams and triggering
+	// MaxListenersExceededWarning in production under concurrent load.
+	//
+	// After the fix the 412 is left to propagate once; reclassification is
+	// done by the caller (writeJSONWithOptions in @eik/core).
+	const { PassThrough, Readable } = await import("node:stream");
+
+	const sink = new Sink({ projectId: "unit-test-only" });
+
+	const mockStream = new PassThrough();
+	sink._bucket = /** @type {any} */ ({
+		file: () => ({
+			createWriteStream: () => mockStream,
+		}),
+	});
+
+	const writable = await sink.write("/foo/bar.txt", "text/plain", {
+		ifNotExists: true,
+	});
+
+	// Collect the error the pipeline callback receives. With the old code the
+	// handler re-emitted a reclassified ALREADY_EXISTS error so the pipeline
+	// received that. With the fix the raw GCS 412 propagates through unchanged;
+	// reclassification is delegated to the caller (writeJSONWithOptions).
+	const readable = new Readable({ read() {} });
+	const pipelineError = /** @type {any} */ (
+		await new Promise((resolve) => {
+			pipeline(readable, writable, resolve);
+			setImmediate(() => {
+				mockStream.emit(
+					"error",
+					Object.assign(new Error("412 Precondition Failed"), { code: 412 }),
+				);
+			});
+		})
+	);
+
+	assert.ok(pipelineError, "pipeline should have received an error");
+	assert.strictEqual(
+		pipelineError.code,
+		412,
+		"the sink must pass the raw GCS 412 to the caller — re-emitting a reclassified error inside the handler caused cascading emissions",
+	);
+});
