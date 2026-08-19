@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/eik-lib/sink-gcs/compare/v3.1.0...v3.1.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* remove error re-emission in write() to prevent cascading listener accumulation ([bb31869](https://github.com/eik-lib/sink-gcs/commit/bb31869ab10a4ac792615c35d273cf0632d8b8f9))
+
 # [3.1.0](https://github.com/eik-lib/sink-gcs/compare/v3.0.31...v3.1.0) (2026-08-19)
 
 
