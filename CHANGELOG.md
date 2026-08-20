@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/eik-lib/sink-gcs/compare/v3.1.1...v3.2.0) (2026-08-20)
+
+
+### Features
+
+* revert to pre-atomic-write implementation ([cdeb6ff](https://github.com/eik-lib/sink-gcs/commit/cdeb6ff323baeecb90c9fd5fd7cfb8bff313b1a4))
+
 ## [3.0.30](https://github.com/eik-lib/sink-gcs/compare/v3.0.29...v3.0.30) (2026-08-14)
 
 
