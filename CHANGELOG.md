@@ -1,3 +1,10 @@
+# [3.3.0](https://github.com/eik-lib/sink-gcs/compare/v3.2.2...v3.3.0) (2026-08-24)
+
+
+### Features
+
+* accept options in write() and store traceId as GCS object metadata ([c5cdf29](https://github.com/eik-lib/sink-gcs/commit/c5cdf29e8d4a1166afdb2fccc522c4df9d3914d5))
+
 ## [3.2.2](https://github.com/eik-lib/sink-gcs/compare/v3.2.1...v3.2.2) (2026-08-21)
 
 
