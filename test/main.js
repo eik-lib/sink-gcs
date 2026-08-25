@@ -312,10 +312,12 @@ await test("Sink() - .read() - directory traversal prevention", async () => {
 await test("Sink() - .writeBuffer() - arguments is illegal", async () => {
 	const sink = new Sink(DEFAULT_CONFIG);
 	await assert.rejects(
+		// @ts-ignore
 		sink.writeBuffer(300, "application/json", Buffer.from("x")),
 		RE_ILLEGAL_ARGUMENT,
 	);
 	await assert.rejects(
+		// @ts-ignore
 		sink.writeBuffer(`/${slug()}/file.js`, 300, Buffer.from("x")),
 		RE_ILLEGAL_ARGUMENT,
 	);
@@ -343,6 +345,7 @@ await test("Sink() - .writeBuffer() - directory traversal prevention", async () 
 
 await test("Sink() - .readBuffer() - arguments is illegal", async () => {
 	const sink = new Sink(DEFAULT_CONFIG);
+	// @ts-ignore
 	await assert.rejects(sink.readBuffer(300), RE_ILLEGAL_ARGUMENT);
 });
 
