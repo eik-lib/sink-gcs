@@ -1,3 +1,15 @@
+# [3.4.0](https://github.com/eik-lib/sink-gcs/compare/v3.3.0...v3.4.0) (2026-08-25)
+
+
+### Bug Fixes
+
+* add [@ts-ignore](https://github.com/ts-ignore) for intentional invalid-type test arguments ([3505aed](https://github.com/eik-lib/sink-gcs/commit/3505aedfc5ef74e50fee6b598945c88e5d0124d3))
+
+
+### Features
+
+* add writeBuffer() and readBuffer() methods ([bd8c96f](https://github.com/eik-lib/sink-gcs/commit/bd8c96f710ea5e830e70a87ceaa5a39d68cfe378))
+
 # [3.3.0](https://github.com/eik-lib/sink-gcs/compare/v3.2.2...v3.3.0) (2026-08-24)
 
 
