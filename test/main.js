@@ -15,6 +15,7 @@ const RE_STORAGE_OPTIONS_REQUIRED =
 	/"storageOptions" argument must be provided/;
 const RE_TIMESTAMP = /"timestamp": [0-9.]+,/gi;
 const RE_DIRECTORY_TRAVERSAL = /Directory traversal/;
+const RE_ILLEGAL_ARGUMENT = /Argument must be a String/;
 
 const getCredentials = () => {
 	try {
@@ -306,6 +307,51 @@ await test("Sink() - .read() - directory traversal prevention", async () => {
 
 	// Clean up sink
 	await sink.delete(dir);
+});
+
+await test("Sink() - .writeBuffer() - arguments is illegal", async () => {
+	const sink = new Sink(DEFAULT_CONFIG);
+	await assert.rejects(
+		sink.writeBuffer(300, "application/json", Buffer.from("x")),
+		RE_ILLEGAL_ARGUMENT,
+	);
+	await assert.rejects(
+		sink.writeBuffer(`/${slug()}/file.js`, 300, Buffer.from("x")),
+		RE_ILLEGAL_ARGUMENT,
+	);
+});
+
+await test("Sink() - .writeBuffer() - directory traversal prevention", async () => {
+	const sink = new Sink(DEFAULT_CONFIG);
+	await assert.rejects(
+		sink.writeBuffer(
+			"../../sensitive.data",
+			"application/octet-stream",
+			Buffer.from("x"),
+		),
+		RE_DIRECTORY_TRAVERSAL,
+	);
+	await assert.rejects(
+		sink.writeBuffer(
+			"../sensitive.data",
+			"application/octet-stream",
+			Buffer.from("x"),
+		),
+		RE_DIRECTORY_TRAVERSAL,
+	);
+});
+
+await test("Sink() - .readBuffer() - arguments is illegal", async () => {
+	const sink = new Sink(DEFAULT_CONFIG);
+	await assert.rejects(sink.readBuffer(300), RE_ILLEGAL_ARGUMENT);
+});
+
+await test("Sink() - .readBuffer() - directory traversal prevention", async () => {
+	const sink = new Sink(DEFAULT_CONFIG);
+	await assert.rejects(
+		sink.readBuffer("../../sensitive.data"),
+		RE_DIRECTORY_TRAVERSAL,
+	);
 });
 
 await test("Sink() - .delete() - Delete existing file", async () => {
