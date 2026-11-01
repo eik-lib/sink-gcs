@@ -45,7 +45,7 @@
     "@eik/typescript-config": "1.0.2",
     "@types/readable-stream": "4.0.25",
     "eslint": "10.4.0",
-    "npm-run-all2": "9.0.3",
+    "npm-run-all2": "9.0.4",
     "prettier": "3.8.3",
     "semantic-release": "25.0.9",
     "typescript": "6.0.3"
