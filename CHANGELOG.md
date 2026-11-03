@@ -1,3 +1,10 @@
+## [3.4.5](https://github.com/eik-lib/sink-gcs/compare/v3.4.4...v3.4.5) (2026-11-03)
+
+
+### Bug Fixes
+
+* **deps:** update eik packages ([#417](https://github.com/eik-lib/sink-gcs/issues/417)) ([5dadcaa](https://github.com/eik-lib/sink-gcs/commit/5dadcaae85807218c8045d2d5c4804e69a692b4b))
+
 ## [3.4.4](https://github.com/eik-lib/sink-gcs/compare/v3.4.3...v3.4.4) (2026-10-09)
 
 
